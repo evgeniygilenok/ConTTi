@@ -1,0 +1,16 @@
+{
+  "name": "contti",
+  "version": "0.0.5",
+  "description": "This is a life-help app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "bootstrap": "^3.3.7"
+  }
+}
