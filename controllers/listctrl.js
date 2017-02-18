@@ -1,5 +1,5 @@
-var tdApp = angular.module('todoApp', []);
-	tdApp.controller('listCtrl', function($scope) {
+var contti = angular.module('contti', []);
+	contti.controller('listCtrl', function($scope) {
 		$scope.taskList = [
 		{
 			todoText:'first task', 
