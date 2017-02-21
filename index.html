@@ -7,15 +7,13 @@
   <link rel="stylesheet" href="../ConTTi/node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script src="../ConTTi/node_modules/angular/angular.min.js"></script>
   <script src="../ConTTi/node_modules/angular-route/angular-route.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="../ConTTi/node_modules/jquery/dist//jquery.min.js"></script>
   <script src="../ConTTi/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   
   <link rel="stylesheet" href="../ConTTi/maincss.css">
   
-
 </head>
 <body ng-app="contti">
-
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -28,7 +26,7 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#/ToDoList"><span class="glyphicon glyphicon-list-alt"></span><b>ToDoList</b></a></li>
+          <li><a href="#/ToDoList"><span class="glyphicon glyphicon-list-alt"></span><b>ToDoList</b></a></li>
           <li><a href="#/Economy"><span class="glyphicon glyphicon-usd"></span><b>Economy</b></a></li>
           <li><a href="#/Projects"><b>Projects</b></a></li>
           <li><a href="#/Contacts"><b>Contacts</b></a></li>
@@ -39,7 +37,6 @@
       </div>
     </div>
   </nav>
-  
   <div class="container-fluid text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
@@ -47,25 +44,51 @@
         <p><a href="#">Link</a></p>
         <p><a href="#">Link</a></p>
       </div>
-      <div class="col-sm-8 text-left" ng-controller="indexctrl"> 
+      <div class="col-sm-8 text-left"> 
+
         <!-- begin content -->
-        <ng-view></ng-view>
-          <!-- end content -->
+
+        <div ng-controller="listCtrl">
+          <h3 class="text-center">Task list</h3>
+          <form class="row" ng-submit="addNew()">
+            <div class="col-md-11">
+              <input class="form-control" type="text" placeholder="Enter you task" ng-model="enterTask">
+            </div>
+            <div class="col-md-1 text-center">
+              <button class="btn btn-info">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </div>
+          </form>
+          <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
+          <div class="list-group" ng-repeat="x in taskList">
+            <div class="col-md-12 list-group-item">
+              <div ng-bind="x.todoText" class="col-md-11"></div>
+              <div class="col-md-1 text-center">
+                <button class="btn btn-danger" ng-click="remove($index)">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-sm-2 sidenav">
-          <div class="well">
-            <p>ADS</p>
-          </div>
-          <div class="well">
-            <p>ADS</p>
-          </div>
+        
+        <!-- end content -->
+
+      </div>
+      <div class="col-sm-2 sidenav">
+        <div class="well">
+          <p>ADS</p>
+        </div>
+        <div class="well">
+          <p>ADS</p>
         </div>
       </div>
     </div>
+  </div>
 
-
-
-    <script src="../ConTTi/indexctrl.js"></script>
-    <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
-  </body>
-  </html>
+  <script src="../ConTTi/indexctrl.js"></script>
+  <script src="../ConTTi/controllers/listctrl.js"></script>
+  <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
+</body>
+</html>

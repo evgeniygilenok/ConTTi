@@ -1,35 +1,26 @@
 <h1>This is tasklist</h1>
 
 <div ng-controller="listCtrl">
-          <h3 class="text-center">Task list</h3>
-          <form class="row" ng-submit="addNew()">
-            <div class="col-md-11">
-              <input class="form-control" type="text" placeholder="Enter you task" ng-model="enterTask">
-            </div>
-            <div class="col-md-1 text-center">
-              <button class="btn btn-info">
-                <span class="glyphicon glyphicon-plus"></span>
-              </button>
-            </div>
-          </form>
-          <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
-          <div class="list-group" ng-repeat="x in taskList">
-            <div class="col-md-12 list-group-item">
-              <div ng-bind="x.todoText" class="col-md-11"></div>
-              <div class="col-md-1 text-center">
-              <button class="btn btn-danger" ng-click="remove($index)">
-                  <span class="glyphicon glyphicon-remove"></span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat dolor ratione repudiandae ea, optio consequatur dolore necessitatibus vel quis ipsam eos laborum, ab illum, facere sit ipsum. Quaerat beatae, assumenda.</span>
-          <span>Nesciunt quos fugit suscipit, cum impedit fuga ducimus tempora rerum possimus sit doloribus, error nemo quod. Dolorum, tempore amet accusantium quidem vitae temporibus qui autem perferendis eum. Eius ipsum, a.</span>
-          <span>Tenetur dicta unde cupiditate accusamus eos quibusdam labore deserunt blanditiis excepturi animi sed minus, nam maxime id, laudantium, mollitia culpa facilis necessitatibus at. Necessitatibus nostrum minus beatae cumque ab, veritatis.</span>
-          <span>Quidem quis quas explicabo reprehenderit doloribus tempora dolor nam voluptate, facilis dolorum veniam ratione, quod doloremque, suscipit! Mollitia accusantium aut eius saepe at est inventore, officia quae, porro veritatis illum.</span>
-          <span>Delectus repellat dolorum consectetur modi optio dolores itaque reprehenderit unde a totam fuga, autem magni et dignissimos! Eius excepturi reiciendis est omnis reprehenderit qui beatae nemo. Quisquam quia minima deleniti?</span>
-          <span>In facere beatae odio, consequuntur voluptatibus error sed, a esse impedit eaque quis. Pariatur natus vel impedit et perferendis magnam ut quas unde, commodi vitae, rerum. Voluptatem, dolorum exercitationem minima!</span>
-          <span>Dolorem ab aut neque temporibus quo. Dolor nam, numquam dolorem a tenetur sint sequi, blanditiis neque sapiente hic id, explicabo quas consequatur aliquam harum voluptate. Iste impedit magni eveniet sed!</span>
-          <span>Mollitia, molestiae dolores maxime. Assumenda hic sequi, dolorum voluptatum, voluptates a quae voluptatibus reprehenderit? Architecto dolorum modi ullam provident laborum facere quisquam quibusdam. Nesciunt tempora atque molestias qui, sequi nobis.</span></p>
+  <h3 class="text-center">Task list</h3>
+  <form class="row" ng-submit="addNew()">
+    <div class="col-md-11">
+      <input class="form-control" type="text" placeholder="Enter you task" ng-model="enterTask">
+    </div>
+    <div class="col-md-1 text-center">
+      <button class="btn btn-info">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+  </form>
+  <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
+  <div class="list-group" ng-repeat="x in taskList">
+    <div class="col-md-12 list-group-item">
+      <div ng-bind="x.todoText" class="col-md-11"></div>
+      <div class="col-md-1 text-center">
+        <button class="btn btn-danger" ng-click="remove($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
