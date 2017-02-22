@@ -37,27 +37,45 @@
       </div>
     </div>
   </nav>
+
+  <!-- begin content -->
+
   <div class="container-fluid text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
-        <p><a href="#">Link</a></p>
+        <p><a href="#"><button class="btn btn-block btn-primary">Inbox</button></a></p>
+        <p><a href="#"><button class="btn btn-block btn-primary">Today</button></a></p>
+        <p><a href="#"><button class="btn btn-block btn-primary">Tomorrow</button></a></p>
+        <p><a href="#"><button class="btn btn-block btn-primary">Next week</button></a></p>
+        <p><a href="#"><button class="btn btn-block btn-info">Add new group</button></a></p>
+
       </div>
       <div class="col-sm-8 text-left"> 
-
-        <!-- begin content -->
-
         <div ng-controller="listCtrl">
           <h3 class="text-center">Task list</h3>
           <form class="row" ng-submit="addNew()">
             <div class="col-md-11">
-              <input class="form-control" type="text" placeholder="Enter you task" ng-model="enterTask">
+              <input class="form-control" type="text" placeholder="Enter your task" ng-model="enterTask">
             </div>
             <div class="col-md-1 text-center">
               <button class="btn btn-info">
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
+            </div>
+            <div>
+              <select name="whatDay" id="day">
+                <option id="inbox">inbox</option>
+                <option id="today">today</option>
+                <option id="tomorrow">tomorrow</option>
+                <option id="anotherdate">another date</option>
+              </select>
+              <select name="whatPriority" id="priority">
+                <option id="veryhigh">very high</option>
+                <option id="high">high</option>
+                <option id="middle" selected>middle</option>
+                <option id="low">low</option>
+                <option id="verylow">very low</option>
+              </select>
             </div>
           </form>
           <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
@@ -65,16 +83,13 @@
             <div class="col-md-12 list-group-item">
               <div ng-bind="x.todoText" class="col-md-11"></div>
               <div class="col-md-1 text-center">
-                <button class="btn btn-danger" ng-click="remove($index)">
-                  <span class="glyphicon glyphicon-remove"></span>
+                <button class="btn btn-success" ng-click="remove($index)">
+                  <span class="glyphicon glyphicon-ok"></span>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- end content -->
-
       </div>
       <div class="col-sm-2 sidenav">
         <div class="well">
@@ -86,6 +101,8 @@
       </div>
     </div>
   </div>
+
+  <!-- end content -->
 
   <script src="../ConTTi/indexctrl.js"></script>
   <script src="../ConTTi/controllers/listctrl.js"></script>

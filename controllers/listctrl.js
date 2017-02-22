@@ -25,6 +25,7 @@ var contti = angular.module('contti', []);
 		
 		$scope.remove = function(x){
 			$scope.taskList.splice(x, 1);
-		
 		}
+
+		
 	});

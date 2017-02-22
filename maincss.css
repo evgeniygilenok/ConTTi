@@ -1,4 +1,16 @@
+a:hover {
+  text-decoration: none;
+}
 
+#day {
+  margin: 10px;
+  width: 180px;
+}
+
+#priority {
+  margin: 10px;
+  width: 130px;
+}
 
 /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
