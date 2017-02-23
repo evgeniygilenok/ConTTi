@@ -63,25 +63,32 @@
               </button>
             </div>
             <div>
+              <span>Select day:</span>
               <select name="whatDay" id="day">
                 <option id="inbox">inbox</option>
                 <option id="today">today</option>
                 <option id="tomorrow">tomorrow</option>
                 <option id="anotherdate">another date</option>
               </select>
-              <select name="whatPriority" id="priority">
-                <option id="veryhigh">very high</option>
-                <option id="high">high</option>
-                <option id="middle" selected>middle</option>
-                <option id="low">low</option>
-                <option id="verylow">very low</option>
+              <span>Select priority:</span>
+              <select ng-model="selectedPriority">
+                <option>highest</option>
+                <option>high</option>
+                <option>middle</option>
+                <option>low</option>
+                <option>lowest</option>
+                <!-- <option ng-repeat="priority in priorities">{{priority}}</option> -->
               </select>
             </div>
           </form>
           <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
           <div class="list-group" ng-repeat="x in taskList">
             <div class="col-md-12 list-group-item">
-              <div ng-bind="x.todoText" class="col-md-11"></div>
+              <div class="col-md-11">
+                <div ng-bind="x.todoText"></div>
+                <div ng-bind="x.priority"></div>
+                <div ng-bind="x.day"></div>
+              </div>
               <div class="col-md-1 text-center">
                 <button class="btn btn-success" ng-click="remove($index)">
                   <span class="glyphicon glyphicon-ok"></span>

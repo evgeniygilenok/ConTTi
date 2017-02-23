@@ -4,22 +4,29 @@ var contti = angular.module('contti', []);
 		{
 			todoText:'first task', 
 			done: false,
-			priority: 'middle'
+			priority: 'low',
+			day: 'Today'
 		},
 		{
 			todoText: 'second task', 
 			done: false,
-			priority: 'middle'
+			priority: 'high',
+			day: 'Tomorrow'
 		},
 		{
 			todoText: 'third task', 
 			done: false,
-			priority: 'middle'
+			priority: 'middle',
+			day: 'Today'
 		}
 		];
 
+		// $scope.priorities = ['very high', 'high', 'middle', 'low', 'very low'];
+		$scope.days = ['Inbox', 'Today', 'Tomorrow', 'Next week'];
+
 		$scope.addNew = function(){
-			$scope.taskList.push({todoText:$scope.enterTask, done:false});
+			// add logic for priority
+			$scope.taskList.push({todoText:$scope.enterTask, done:false, priority: $scope.selectedPriority});
         	$scope.enterTask = "";
         }
 		
