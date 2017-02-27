@@ -40,54 +40,45 @@
 
   <!-- begin content -->
 
-  <div class="container-fluid text-center">    
+  <div class="container-fluid text-center" ng-controller="listCtrl">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <p><a href="#"><button class="btn btn-block btn-primary">Inbox</button></a></p>
-        <p><a href="#"><button class="btn btn-block btn-primary">Today</button></a></p>
-        <p><a href="#"><button class="btn btn-block btn-primary">Tomorrow</button></a></p>
-        <p><a href="#"><button class="btn btn-block btn-primary">Next week</button></a></p>
-        <p><a href="#"><button class="btn btn-block btn-info">Add new group</button></a></p>
-
+        <div ng-repeat="x in days">
+          <p><a href="#"><button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button></a></p>
+        </div>
+        <button class="btn btn-block btn-info" ng-click="addGroup()">Add new group</button>
       </div>
       <div class="col-sm-8 text-left"> 
-        <div ng-controller="listCtrl">
+        <div>
           <h3 class="text-center">Task list</h3>
           <form class="row" ng-submit="addNew()">
             <div class="col-md-11">
-              <input class="form-control" type="text" placeholder="Enter your task" ng-model="enterTask">
+              <input class="form-control" type="text" placeholder="New task..." ng-model="enterTask">
             </div>
             <div class="col-md-1 text-center">
               <button class="btn btn-info">
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
             </div>
-            <div>
+            <div class="col-md-12">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
               <span>Select day:</span>
-              <select name="whatDay" id="day">
-                <option id="inbox">inbox</option>
-                <option id="today">today</option>
-                <option id="tomorrow">tomorrow</option>
-                <option id="anotherdate">another date</option>
+              <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
               </select>
               <span>Select priority:</span>
-              <select ng-model="selectedPriority">
-                <option>highest</option>
-                <option>high</option>
-                <option>middle</option>
-                <option>low</option>
-                <option>lowest</option>
-                <!-- <option ng-repeat="priority in priorities">{{priority}}</option> -->
-              </select>
+              <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
+              </select></div>
+              <div class="col-md-1"></div>
             </div>
           </form>
           <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
           <div class="list-group" ng-repeat="x in taskList">
             <div class="col-md-12 list-group-item">
               <div class="col-md-11">
-                <div ng-bind="x.todoText"></div>
-                <div ng-bind="x.priority"></div>
-                <div ng-bind="x.day"></div>
+                <h4><b><div ng-bind="x.todoText"></div></b></h4>
+                <span>Priority: </span><span ng-bind="x.priority"></span><br>
+                <span>Day: </span><span ng-bind="x.day"></span>
               </div>
               <div class="col-md-1 text-center">
                 <button class="btn btn-success" ng-click="remove($index)">

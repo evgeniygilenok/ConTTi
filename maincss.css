@@ -4,12 +4,12 @@ a:hover {
 
 #day {
   margin: 10px;
-  width: 180px;
+  width: 100px;
 }
 
 #priority {
   margin: 10px;
-  width: 130px;
+  width: 100px;
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */ 
