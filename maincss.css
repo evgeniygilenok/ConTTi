@@ -12,6 +12,17 @@ a:hover {
   width: 100px;
 }
 
+#enterGroup {
+  margin: 10px 0 10px 0;
+}
+
+div.entGr {
+  height: 35px;
+}
+
+.ng-hide {
+  height: 0;
+}
 /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;

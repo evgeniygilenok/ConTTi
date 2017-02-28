@@ -9,6 +9,7 @@
   <script src="../ConTTi/node_modules/angular-route/angular-route.min.js"></script>
   <script src="../ConTTi/node_modules/jquery/dist//jquery.min.js"></script>
   <script src="../ConTTi/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../ConTTi/node_modules/angular-animate/angular-animate.min.js"></script>
   
   <link rel="stylesheet" href="../ConTTi/maincss.css">
   
@@ -46,7 +47,10 @@
         <div ng-repeat="x in days">
           <p><a href="#"><button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button></a></p>
         </div>
-        <button class="btn btn-block btn-info" ng-click="addGroup()">Add new group</button>
+        <button class="btn btn-block btn-info" ng-model="enterGroup" ng-click="addGroup()">Add new group</button>
+        <div class="entGr" id="enterGroup" ng-show="enterGroup">
+          <input class="form-control" type="text" placeholder="New group...">
+        </div>
       </div>
       <div class="col-sm-8 text-left"> 
         <div>
@@ -61,49 +65,49 @@
               </button>
             </div>
             <div class="col-md-12">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-              <span>Select day:</span>
-              <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
-              </select>
-              <span>Select priority:</span>
-              <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
-              </select></div>
               <div class="col-md-1"></div>
-            </div>
-          </form>
-          <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
-          <div class="list-group" ng-repeat="x in taskList">
-            <div class="col-md-12 list-group-item">
-              <div class="col-md-11">
-                <h4><b><div ng-bind="x.todoText"></div></b></h4>
-                <span>Priority: </span><span ng-bind="x.priority"></span><br>
-                <span>Day: </span><span ng-bind="x.day"></span>
+              <div class="col-md-10">
+                <span>Select day:</span>
+                <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
+                </select>
+                <span>Select priority:</span>
+                <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
+                </select></div>
+                <div class="col-md-1"></div>
               </div>
-              <div class="col-md-1 text-center">
-                <button class="btn btn-success" ng-click="remove($index)">
-                  <span class="glyphicon glyphicon-ok"></span>
-                </button>
+            </form>
+            <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
+            <div class="list-group" ng-repeat="x in taskList">
+              <div class="col-md-12 list-group-item">
+                <div class="col-md-11">
+                  <h4><b><div ng-bind="x.todoText"></div></b></h4>
+                  <span>Priority: </span><span ng-bind="x.priority"></span><br>
+                  <span>Day: </span><span ng-bind="x.day"></span>
+                </div>
+                <div class="col-md-1 text-center">
+                  <button class="btn btn-success" ng-click="remove($index)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-2 sidenav">
-        <div class="well">
-          <p>ADS</p>
-        </div>
-        <div class="well">
-          <p>ADS</p>
+        <div class="col-sm-2 sidenav">
+          <div class="well">
+            <p>ADS</p>
+          </div>
+          <div class="well">
+            <p>ADS</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- end content -->
+    <!-- end content -->
 
-  <script src="../ConTTi/indexctrl.js"></script>
-  <script src="../ConTTi/controllers/listctrl.js"></script>
-  <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
-</body>
-</html>
+    <script src="../ConTTi/indexctrl.js"></script>
+    <script src="../ConTTi/controllers/listctrl.js"></script>
+    <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
+  </body>
+  </html>

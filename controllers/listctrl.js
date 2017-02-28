@@ -1,4 +1,4 @@
-var contti = angular.module('contti', []);
+var contti = angular.module('contti', ['ngAnimate']);
 	contti.controller('listCtrl', function($scope) {
 		$scope.taskList = [
 		{
@@ -54,8 +54,20 @@ var contti = angular.module('contti', []);
 			$scope.taskList.splice(x, 1);
 		};
 
-		$scope.addGroup = function(){
-			$scope.days.push({id: '5', name: 'new group'});	
+
+		$scope.enterGroup = false;
+		$scope.addGroup = function(x){
+			this.x = x;
+			if (!x) {
+				x = true;
+				console.log(x);
+			} else
+			{
+				x = false;
+				console.log(x);
+			}
+
+			// $scope.days.push({id: '5', name: $scope.enterGroup});	
 		};
 	});
 
