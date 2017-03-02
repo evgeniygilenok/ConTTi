@@ -1,26 +1,63 @@
-<h1>This is tasklist</h1>
-
-<div ng-controller="listCtrl">
-  <h3 class="text-center">Task list</h3>
-  <form class="row" ng-submit="addNew()">
-    <div class="col-md-11">
-      <input class="form-control" type="text" placeholder="Enter you task" ng-model="enterTask">
-    </div>
-    <div class="col-md-1 text-center">
-      <button class="btn btn-info">
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
-    </div>
-  </form>
-  <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
-  <div class="list-group" ng-repeat="x in taskList">
-    <div class="col-md-12 list-group-item">
-      <div ng-bind="x.todoText" class="col-md-11"></div>
-      <div class="col-md-1 text-center">
-        <button class="btn btn-danger" ng-click="remove($index)">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
+<div class="container-fluid text-center" ng-controller="listCtrl">    
+    <div class="row content">
+      <div class="col-sm-2 sidenav">
+        <div ng-repeat="x in days">
+          <p><a href="#"><button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button></a></p>
+        </div>
+        <hr class="hrDivide">
+        <button class="btn btn-block btn-info" ng-click="addGroup()">Add new group</button>
+        <div class="entGr" id="enterGroup">
+          <input class="form-control" type="text" placeholder="New group..." ng-model="enterGroup">
+        </div>
+      </div>
+      <div class="col-sm-8 text-left"> 
+        <div>
+          <h3 class="text-center">Task list</h3>
+          <form class="row" ng-submit="addNew()">
+            <div class="col-md-11">
+              <input class="form-control" type="text" placeholder="New task..." ng-model="enterTask">
+            </div>
+            <div class="col-md-1 text-center">
+              <button class="btn btn-info">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                <span>Select day:</span>
+                <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
+                </select>
+                <span>Select priority:</span>
+                <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
+                </select></div>
+                <div class="col-md-1"></div>
+              </div>
+            </form>
+            <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
+            <div class="list-group" ng-repeat="x in taskList">
+              <div class="col-md-12 list-group-item">
+                <div class="col-md-11">
+                  <h4><b><div ng-bind="x.todoText"></div></b></h4>
+                  <span>Priority: </span><span ng-bind="x.priority"></span><br>
+                  <span>Day: </span><span ng-bind="x.day"></span>
+                </div>
+                <div class="col-md-1 text-center">
+                  <button class="btn btn-success" ng-click="remove($index)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-2 sidenav">
+          <div class="well">
+            <p>ADS</p>
+          </div>
+          <div class="well">
+            <p>ADS</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>

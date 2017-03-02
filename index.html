@@ -12,6 +12,7 @@
   <script src="../ConTTi/node_modules/angular-animate/angular-animate.min.js"></script>
   
   <link rel="stylesheet" href="../ConTTi/maincss.css">
+  <link rel="stylesheet" href="../ConTTi/view/todolist.css">
   
 </head>
 <body ng-app="contti">
@@ -47,9 +48,10 @@
         <div ng-repeat="x in days">
           <p><a href="#"><button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button></a></p>
         </div>
-        <button class="btn btn-block btn-info" ng-model="enterGroup" ng-click="addGroup()">Add new group</button>
-        <div class="entGr" id="enterGroup" ng-show="enterGroup">
-          <input class="form-control" type="text" placeholder="New group...">
+        <hr class="hrDivide">
+        <button class="btn btn-block btn-info" ng-click="addGroup()">Add new group</button>
+        <div class="entGr" id="enterGroup">
+          <input class="form-control" type="text" placeholder="New group..." ng-model="enterGroup">
         </div>
       </div>
       <div class="col-sm-8 text-left"> 
@@ -64,50 +66,78 @@
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
             </div>
-            <div class="col-md-12">
-              <div class="col-md-1"></div>
-              <div class="col-md-10">
-                <span>Select day:</span>
-                <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
-                </select>
-                <span>Select priority:</span>
-                <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
-                </select></div>
-                <div class="col-md-1"></div>
+            
+          </form>
+          <table class="table">
+            <th class="isComplite">
+              <div>
+                <input type="checkbox" disabled />
               </div>
-            </form>
-            <div><span class="row"><b>I need to: </b><i>{{ enterTask }}</i></span></div>
-            <div class="list-group" ng-repeat="x in taskList">
-              <div class="col-md-12 list-group-item">
-                <div class="col-md-11">
-                  <h4><b><div ng-bind="x.todoText"></div></b></h4>
-                  <span>Priority: </span><span ng-bind="x.priority"></span><br>
-                  <span>Day: </span><span ng-bind="x.day"></span>
+            </th>
+            <th class="todoNameList">
+              <span>todoText</span><br>
+              <div>
+                <div class="col-md-6">1</div>
+                <div class="col-md-3">
+                  <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
+                  </select>
                 </div>
-                <div class="col-md-1 text-center">
-                  <button class="btn btn-success" ng-click="remove($index)">
-                    <span class="glyphicon glyphicon-ok"></span>
-                  </button>
+                <div class="col-md-3">
+                  <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
+                  </select>
                 </div>
               </div>
-            </div>
-          </div>
+            </th>
+            <th class="actions">
+              <div>
+                <button class="btn btn-info btn-xs disabled"><span class="glyphicon glyphicon-cog"></span></button>
+                <button class="btn btn-danger btn-xs disabled"><span class="glyphicon glyphicon-trash"></span></button>
+              </div>
+            </th>
+          </table>
+          <hr class="hrDivide">
+
+          <table class="table table-hover">
+            <tr ng-repeat="task in taskList">
+              <th class="isComplite" ng-class="{'todoCompliteTaskColor': task.done}">
+                <div>
+                  <input type="checkbox" ng-checked="task.done" ng-click="onCompletedClick(task)">
+                </div>
+              </th>
+              <th class="todoNameList" ng-class="{'todoCompliteTaskColor': task.done}">
+                <span ng-class="{'todoCompliteTask': task.done}">{{task.todoText}}</span><br>
+                <div>
+                  <div class="col-md-8">1</div>
+                  <div class="col-md-3">{{task.day}}</div>
+                  <div class="col-md-1">{{task.priority}}</div>
+                </div>
+              </th>
+              <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">
+                <div>
+                  <button class="btn btn-info btn-xs"><span class="glyphicon glyphicon-cog"></span></button>
+                  <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </th>
+            </tr>
+          </table>
+
         </div>
-        <div class="col-sm-2 sidenav">
-          <div class="well">
-            <p>ADS</p>
-          </div>
-          <div class="well">
-            <p>ADS</p>
-          </div>
+      </div>
+      <div class="col-sm-2 sidenav">
+        <div class="well">
+          <p>ADS</p>
+        </div>
+        <div class="well">
+          <p>ADS</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- end content -->
+  <!-- end content -->
 
-    <script src="../ConTTi/indexctrl.js"></script>
-    <script src="../ConTTi/controllers/listctrl.js"></script>
-    <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
-  </body>
-  </html>
+  <script src="../ConTTi/indexctrl.js"></script>
+  <script src="../ConTTi/controllers/listctrl.js"></script>
+  <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
+</body>
+</html>

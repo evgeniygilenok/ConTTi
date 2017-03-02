@@ -1,5 +1,6 @@
-var contti = angular.module('contti', ['ngAnimate']);
+var contti = angular.module('contti', []);
 	contti.controller('listCtrl', function($scope) {
+// taskList data
 		$scope.taskList = [
 		{
 			todoText:'first task', 
@@ -9,15 +10,33 @@ var contti = angular.module('contti', ['ngAnimate']);
 		},
 		{
 			todoText: 'second task', 
-			done: false,
+			done: true,
 			priority: 'high',
 			day: 'Tomorrow'
 		},
 		{
 			todoText: 'third task', 
 			done: false,
-			priority: 'middle',
+			priority: 'high',
 			day: 'Today'
+		},
+		{
+			todoText: 'fourth task', 
+			done: true,
+			priority: 'low',
+			day: 'Tomorrow'
+		},
+		{
+			todoText: 'fifth task', 
+			done: false,
+			priority: 'very high',
+			day: 'Today'
+		},
+		{
+			todoText: 'sixth task', 
+			done: false,
+			priority: 'very low',
+			day: 'Tomorrow'
 		}
 		];
 
@@ -39,9 +58,9 @@ var contti = angular.module('contti', ['ngAnimate']);
 			{id: '4', name: 'Next week'},
 		];
 		$scope.selectedDay = {id: '1', name: 'Inbox'};
-
+// add new task in taskList
 		$scope.addNew = function(){
-					$scope.taskList.push({
+					$scope.taskList.unshift({
 						todoText:$scope.enterTask, 
 						done:false, 
 						priority: $scope.selectedPriority.name,
@@ -54,20 +73,18 @@ var contti = angular.module('contti', ['ngAnimate']);
 			$scope.taskList.splice(x, 1);
 		};
 
-
-		$scope.enterGroup = false;
-		$scope.addGroup = function(x){
-			this.x = x;
-			if (!x) {
-				x = true;
-				console.log(x);
-			} else
-			{
-				x = false;
-				console.log(x);
+// add new group
+		$scope.addGroup = function(){
+			$scope.days.push({id: '5', name: $scope.enterGroup});
+			$scope.enterGroup = '';
 			}
 
-			// $scope.days.push({id: '5', name: $scope.enterGroup});	
+/////////////////////////////
+
+		$scope.onCompletedClick = function(task){
+			task.done = !task.done;
 		};
+				
+		
 	});
 

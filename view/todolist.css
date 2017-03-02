@@ -1,0 +1,29 @@
+.isComplite {
+	width: 50px;
+	margin: 0 auto 10px;
+}
+
+.todoText {
+	margin-left: 10px;
+}
+
+.actions {
+	width: 100px;
+	margin: 0 auto 10px;
+}
+
+table th {
+	text-align: center;
+}
+
+.todoNameList {
+	text-align: left;
+}
+
+.todoCompliteTask {
+	text-decoration: line-through;
+}
+
+.todoCompliteTaskColor {
+	background-color: lightgreen;
+}
