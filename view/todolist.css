@@ -1,3 +1,27 @@
+body {
+	background-image: url(../img/bg-img.jpg);
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.sidenav {
+	min-height: 700px;
+}
+
+.bgcol {
+	background-color: #e6e6e6;
+}
+
+.newTaskForm {
+	margin: 0 15px;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
 .isComplite {
 	width: 50px;
 	margin: 0 auto 10px;
@@ -7,17 +31,68 @@
 	margin-left: 10px;
 }
 
+.typingTask {
+	min-height: 20px;
+}
+
+.todoNameList {
+	text-align: left;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	flex-direction: column;
+}
+
+.taskName {
+	flex: 1;
+}
+
+.taskSetting {
+	font-size: 12px;
+	font-weight: normal;
+	flex: 1;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.taskDay {
+	flex: 1;
+}
+
+.taskInfo {
+	flex: 5;
+}
+
+.taskPriority {
+	flex: 1;
+}
+
 .actions {
 	width: 100px;
 	margin: 0 auto 10px;
+}
+
+.table>tbody>tr>td, 
+.table>tbody>tr>th, 
+.table>tfoot>tr>td, 
+.table>tfoot>tr>th, 
+.table>thead>tr>td, 
+.table>thead>tr>th {
+	vertical-align: middle;
+	min-height: 80px;
 }
 
 table th {
 	text-align: center;
 }
 
-.todoNameList {
-	text-align: left;
+.tableTop>tbody>tr>th {
+	border-top: 0;
 }
 
 .todoCompliteTask {
@@ -25,5 +100,5 @@ table th {
 }
 
 .todoCompliteTaskColor {
-	background-color: lightgreen;
+	background-color: #ccffcc;
 }

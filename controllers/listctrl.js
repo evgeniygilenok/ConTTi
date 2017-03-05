@@ -6,37 +6,43 @@ var contti = angular.module('contti', []);
 			todoText:'first task', 
 			done: false,
 			priority: 'low',
-			day: 'Today'
+			day: 'Today',
+			isEditing: false
 		},
 		{
 			todoText: 'second task', 
 			done: true,
 			priority: 'high',
-			day: 'Tomorrow'
+			day: 'Tomorrow',
+			isEditing: false
 		},
 		{
 			todoText: 'third task', 
 			done: false,
 			priority: 'high',
-			day: 'Today'
+			day: 'Today',
+			isEditing: false
 		},
 		{
 			todoText: 'fourth task', 
 			done: true,
 			priority: 'low',
-			day: 'Tomorrow'
+			day: 'Tomorrow',
+			isEditing: false
 		},
 		{
 			todoText: 'fifth task', 
 			done: false,
 			priority: 'very high',
-			day: 'Today'
+			day: 'Today',
+			isEditing: false
 		},
 		{
 			todoText: 'sixth task', 
 			done: false,
 			priority: 'very low',
-			day: 'Tomorrow'
+			day: 'Tomorrow',
+			isEditing: false
 		}
 		];
 
@@ -59,20 +65,38 @@ var contti = angular.module('contti', []);
 		];
 		$scope.selectedDay = {id: '1', name: 'Inbox'};
 // add new task in taskList
-		$scope.addNew = function(){
+		$scope.addNewTask = function(){
 					$scope.taskList.unshift({
 						todoText:$scope.enterTask, 
 						done:false, 
 						priority: $scope.selectedPriority.name,
-						day: $scope.selectedDay.name
+						day: $scope.selectedDay.name,
+						isEditing: false
 					});
         	$scope.enterTask = "";
         };
 		
-		$scope.remove = function(x){
+		$scope.onDelet = function(x){
 			$scope.taskList.splice(x, 1);
 		};
 
+		$scope.onCompletedClick = function(task){
+					task.done = !task.done;
+				};
+
+		$scope.onEdit = function(task){
+			task.isEditing = true;
+			task.updatedTask = task.todoText;
+		}
+
+		$scope.onCansel = function(task) {
+			task.isEditing = false;
+		}
+
+		$scope.updateTask = function(task) {
+			task.todoText = task.updatedTask;
+			task.isEditing = false;
+		}
 // add new group
 		$scope.addGroup = function(){
 			$scope.days.push({id: '5', name: $scope.enterGroup});
@@ -81,9 +105,7 @@ var contti = angular.module('contti', []);
 
 /////////////////////////////
 
-		$scope.onCompletedClick = function(task){
-			task.done = !task.done;
-		};
+		
 				
 		
 	});

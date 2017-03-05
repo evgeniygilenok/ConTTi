@@ -46,7 +46,9 @@
     <div class="row content">
       <div class="col-sm-2 sidenav">
         <div ng-repeat="x in days">
-          <p><a href="#"><button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button></a></p>
+          <p><a href="#">
+            <button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button>
+          </a></p>
         </div>
         <hr class="hrDivide">
         <button class="btn btn-block btn-info" ng-click="addGroup()">Add new group</button>
@@ -57,32 +59,32 @@
       <div class="col-sm-8 text-left"> 
         <div>
           <h3 class="text-center">Task list</h3>
-          <form class="row" ng-submit="addNew()">
-            <div class="col-md-11">
+          <form class="row" ng-submit="addNewTask()">
+            <div class="newTaskForm">
               <input class="form-control" type="text" placeholder="New task..." ng-model="enterTask">
-            </div>
-            <div class="col-md-1 text-center">
               <button class="btn btn-info">
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
             </div>
-            
           </form>
-          <table class="table">
+
+          <table class="table tableTop bgcol">
             <th class="isComplite">
               <div>
-                <input type="checkbox" disabled />
+                <button class="btn btn-sm btn-default btn-circle disabled">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </button>
               </div>
             </th>
             <th class="todoNameList">
-              <span>todoText</span><br>
-              <div>
-                <div class="col-md-6">1</div>
-                <div class="col-md-3">
+              <div class="typingTask">{{enterTask}}</div>
+              <div class="taskSetting">
+                <div class="taskInfo">1</div>
+                <div class="taskDay">
                   <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
                   </select>
                 </div>
-                <div class="col-md-3">
+                <div class="taskPriority">
                   <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
                   </select>
                 </div>
@@ -90,32 +92,63 @@
             </th>
             <th class="actions">
               <div>
-                <button class="btn btn-info btn-xs disabled"><span class="glyphicon glyphicon-cog"></span></button>
-                <button class="btn btn-danger btn-xs disabled"><span class="glyphicon glyphicon-trash"></span></button>
+                <button class="btn btn-info btn-sm disabled btn-circle">
+                  <span class="glyphicon glyphicon-cog"></span>
+                </button>
+                <button class="btn btn-danger btn-sm disabled btn-circle">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
               </div>
             </th>
           </table>
-          <hr class="hrDivide">
+          
 
-          <table class="table table-hover">
+          <table class="table table-hover bgcol">
             <tr ng-repeat="task in taskList">
               <th class="isComplite" ng-class="{'todoCompliteTaskColor': task.done}">
                 <div>
-                  <input type="checkbox" ng-checked="task.done" ng-click="onCompletedClick(task)">
+                  <button class="btn btn-sm btn-default btn-circle" ng-if="!task.done" ng-click="onCompletedClick(task)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>
+                  <button class="btn btn-sm btn-success btn-circle" ng-if="task.done" ng-click="onCompletedClick(task)">
+                    <span class="glyphicon glyphicon-ok"></span>
+                  </button>
                 </div>
               </th>
               <th class="todoNameList" ng-class="{'todoCompliteTaskColor': task.done}">
-                <span ng-class="{'todoCompliteTask': task.done}">{{task.todoText}}</span><br>
                 <div>
-                  <div class="col-md-8">1</div>
-                  <div class="col-md-3">{{task.day}}</div>
-                  <div class="col-md-1">{{task.priority}}</div>
+                  <span
+                    class="taskName"
+                    ng-if="!task.isEditing"
+                    ng-class="{'todoCompliteTask': task.done}">
+                    {{task.todoText}}
+                  </span>
+                  <span class="taskName" ng-if="task.isEditing">
+                    <form ng-submit="updateTask(task)">
+                      <input class="form-control input-sm" ng-value="task.todoText" ng-model="task.updatedTask" />
+                    </form>
+                  </span>
+                </div>
+                <div class="taskSetting">
+                  <div class="taskInfo">1</div>
+                  <div class="taskDay">{{task.day}}</div>
+                  <div class="taskPriority">{{task.priority}}</div>
                 </div>
               </th>
               <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">
                 <div>
-                  <button class="btn btn-info btn-xs"><span class="glyphicon glyphicon-cog"></span></button>
-                  <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button>
+                  <button ng-if="!task.isEditing" class="btn btn-info btn-sm btn-circle" ng-click="onEdit(task)">
+                    <span class="glyphicon glyphicon-cog"></span>
+                  </button>
+                  <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelet($index)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </button>
+                  <button ng-if="task.isEditing" class="btn btn-primary btn-sm btn-circle" ng-click="updateTask(task)">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                  </button>
+                  <button ng-if="task.isEditing" class="btn btn-default btn-sm btn-circle" ng-click="onCansel(task)">
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                  </button>
                 </div>
               </th>
             </tr>
