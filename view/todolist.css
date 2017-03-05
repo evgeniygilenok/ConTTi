@@ -6,11 +6,18 @@ body {
 }
 
 .sidenav {
-	min-height: 700px;
+	min-height: 100%;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+.main-header {
+	color: #fff;
+	text-decoration: underline;
+	text-transform: uppercase;
 }
 
 .bgcol {
-	background-color: #e6e6e6;
+	background-color: rgba(230, 230, 230, 0.8);
 }
 
 .newTaskForm {
@@ -32,7 +39,8 @@ body {
 }
 
 .typingTask {
-	min-height: 20px;
+	min-height: 30px;
+	text-shadow: 2px 0px 2px white;
 }
 
 .todoNameList {
@@ -50,7 +58,7 @@ body {
 }
 
 .taskSetting {
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: normal;
 	flex: 1;
 	display: -webkit-flex;
@@ -100,5 +108,58 @@ table th {
 }
 
 .todoCompliteTaskColor {
-	background-color: #ccffcc;
+	background-color: rgba(204, 255, 204, 0.7);
+}
+
+.dropdown-menu {
+	margin: 0;
+	padding: 3px;
+	left: -105%;
+}
+
+.prio-list {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+}
+
+.glyphicon-flag {
+	font-size: 140%;
+}
+
+label.btn.btn-sm {
+	margin: 0;
+	padding: 2px 3px;
+	border: none;
+	flex: 1;
+	text-shadow: 0px 0px 1px black;
+}
+
+button.btn.btn-sm.btn-default.dropdown-toggle {
+	margin: 0;
+	padding: 5px 8px;
+	border: none;
+	text-shadow: 0px 0px 1px black;
+}
+
+.prio1 {
+	color: #c7c7c7;
+}
+
+.prio2 {
+	color: #ffff4d;
+}
+
+.prio3 {
+	color: #ffe066;
+}
+
+.prio4 {
+	color: #ff8000;
+}
+
+.prio5 {
+	color: #cc2900;
 }

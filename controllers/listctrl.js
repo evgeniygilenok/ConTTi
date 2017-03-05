@@ -54,6 +54,7 @@ var contti = angular.module('contti', []);
 			{id: '4', name: 'low'},
 			{id: '5', name: 'very low'}
 			];
+		$scope.onPriority = false;
 		$scope.selectedPriority = {id: '3', name: 'middle'};
 
 // days data
@@ -97,6 +98,19 @@ var contti = angular.module('contti', []);
 			task.todoText = task.updatedTask;
 			task.isEditing = false;
 		}
+
+// priority
+		// $scope.prio11 = false;
+		// $scope.prio22 = false;
+		// $scope.prio33 = false;
+		// $scope.prio44 = false;
+		// $scope.prio55 = false;
+		$scope.onTogglePrio = function(x) {
+			x = !x;
+			console.log(x);
+		}
+		
+
 // add new group
 		$scope.addGroup = function(){
 			$scope.days.push({id: '5', name: $scope.enterGroup});

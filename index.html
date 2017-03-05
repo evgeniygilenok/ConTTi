@@ -57,120 +57,152 @@
         </div>
       </div>
       <div class="col-sm-8 text-left"> 
-        <div>
-          <h3 class="text-center">Task list</h3>
-          <form class="row" ng-submit="addNewTask()">
-            <div class="newTaskForm">
-              <input class="form-control" type="text" placeholder="New task..." ng-model="enterTask">
-              <button class="btn btn-info">
-                <span class="glyphicon glyphicon-plus"></span>
+
+        <h3 class="text-center main-header">Todo list</h3>
+        <form class="row" ng-submit="addNewTask()">
+          <div class="newTaskForm">
+            <input class="form-control" type="text" placeholder="New task..." ng-model="enterTask">
+            <button class="btn btn-info">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </div>
+        </form>
+
+        <table class="table tableTop bgcol">
+          <th class="isComplite">
+            <div>
+              <button class="btn btn-sm btn-default btn-circle disabled">
+                <span class="glyphicon glyphicon-ok"></span>
               </button>
             </div>
-          </form>
+          </th>
+          <th class="todoNameList">
+            <div class="typingTask">{{enterTask}}</div>
+            <div class="taskSetting">
+              <div class="taskInfo">1</div>
+              <div class="taskDay">
+                <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
+                </select>
+              </div>
+              <div class="taskPriority">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                    <span ng-class="{'prio1': prio11, 'prio2': prio22, 'prio3': prio33, 'prio4': prio44, 'prio5': prio55}"><span class="glyphicon glyphicon-flag"></span>
+                    </span>
+                      
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li data-toggle="buttons" class="prio-list">
+                      <label class="btn btn-sm btn-default">
+                        <input type="radio" name="options" ng-model="prio11" autocomplete="off">
+                        <span class="glyphicon glyphicon-flag prio1" ng-click="onTogglePrio(prio11)"></span>
+                      </label>
+                      <label class="btn btn-sm btn-default">
+                        <input type="radio" name="options" ng-model="prio22" autocomplete="off">
+                        <span class="glyphicon glyphicon-flag prio2" ng-click="onTogglePrio(prio22)"></span>
+                      </label>
+                      <label class="btn btn-sm btn-default">
+                        <input type="radio" name="options" ng-model="prio33" autocomplete="off">
+                        <span class="glyphicon glyphicon-flag prio3" ng-click="onTogglePrio(prio33)"></span>
+                      </label>
+                      <label class="btn btn-sm btn-default">
+                        <input type="radio" name="options" ng-model="prio44" autocomplete="off">
+                        <span class="glyphicon glyphicon-flag prio4" ng-click="onTogglePrio(prio44)"></span>
+                      </label>
+                      <label class="btn btn-sm btn-default">
+                        <input type="radio" name="options" ng-model="prio55" autocomplete="off">
+                        <span class="glyphicon glyphicon-flag prio5" ng-click="onTogglePrio(prio55)"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+              
+                  <!-- <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
+                </select> -->
+              </div>
+            </div>
+          </th>
+          <th class="actions">
+            <div>
+              <button class="btn btn-info btn-sm disabled btn-circle">
+                <span class="glyphicon glyphicon-cog"></span>
+              </button>
+              <button class="btn btn-danger btn-sm disabled btn-circle">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </div>
+          </th>
+        </table>
 
-          <table class="table tableTop bgcol">
-            <th class="isComplite">
+
+        <table class="table table-hover bgcol">
+          <tr ng-repeat="task in taskList">
+            <th class="isComplite" ng-class="{'todoCompliteTaskColor': task.done}">
               <div>
-                <button class="btn btn-sm btn-default btn-circle disabled">
+                <button class="btn btn-sm btn-default btn-circle" ng-if="!task.done" ng-click="onCompletedClick(task)">
+                  <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                <button class="btn btn-sm btn-success btn-circle" ng-if="task.done" ng-click="onCompletedClick(task)">
                   <span class="glyphicon glyphicon-ok"></span>
                 </button>
               </div>
             </th>
-            <th class="todoNameList">
-              <div class="typingTask">{{enterTask}}</div>
-              <div class="taskSetting">
-                <div class="taskInfo">1</div>
-                <div class="taskDay">
-                  <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
-                  </select>
-                </div>
-                <div class="taskPriority">
-                  <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
-                  </select>
-                </div>
-              </div>
-            </th>
-            <th class="actions">
-              <div>
-                <button class="btn btn-info btn-sm disabled btn-circle">
-                  <span class="glyphicon glyphicon-cog"></span>
-                </button>
-                <button class="btn btn-danger btn-sm disabled btn-circle">
-                  <span class="glyphicon glyphicon-trash"></span>
-                </button>
-              </div>
-            </th>
-          </table>
-          
+            <th class="todoNameList" ng-class="{'todoCompliteTaskColor': task.done}">
+              <div class="typingTask">
+                <span
+                class="taskName"
+                ng-if="!task.isEditing"
+                ng-class="{'todoCompliteTask': task.done}">
+                {{task.todoText}}
+              </span>
+              <span class="taskName" ng-if="task.isEditing">
+                <form ng-submit="updateTask(task)">
+                  <input class="form-control input-sm" ng-value="task.todoText" ng-model="task.updatedTask" />
+                </form>
+              </span>
+            </div>
+            <div class="taskSetting">
+              <div class="taskInfo">1</div>
+              <div class="taskDay">{{task.day}}</div>
+              <div class="taskPriority">{{task.priority}}</div>
+            </div>
+          </th>
+          <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">
+            <div>
+              <button ng-if="!task.isEditing" class="btn btn-info btn-sm btn-circle" ng-click="onEdit(task)">
+                <span class="glyphicon glyphicon-cog"></span>
+              </button>
+              <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelet($index)">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+              <button ng-if="task.isEditing" class="btn btn-primary btn-sm btn-circle" ng-click="updateTask(task)">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+              </button>
+              <button ng-if="task.isEditing" class="btn btn-default btn-sm btn-circle" ng-click="onCansel(task)">
+                <span class="glyphicon glyphicon-ban-circle"></span>
+              </button>
+            </div>
+          </th>
+        </tr>
+      </table>
 
-          <table class="table table-hover bgcol">
-            <tr ng-repeat="task in taskList">
-              <th class="isComplite" ng-class="{'todoCompliteTaskColor': task.done}">
-                <div>
-                  <button class="btn btn-sm btn-default btn-circle" ng-if="!task.done" ng-click="onCompletedClick(task)">
-                    <span class="glyphicon glyphicon-ok"></span>
-                  </button>
-                  <button class="btn btn-sm btn-success btn-circle" ng-if="task.done" ng-click="onCompletedClick(task)">
-                    <span class="glyphicon glyphicon-ok"></span>
-                  </button>
-                </div>
-              </th>
-              <th class="todoNameList" ng-class="{'todoCompliteTaskColor': task.done}">
-                <div>
-                  <span
-                    class="taskName"
-                    ng-if="!task.isEditing"
-                    ng-class="{'todoCompliteTask': task.done}">
-                    {{task.todoText}}
-                  </span>
-                  <span class="taskName" ng-if="task.isEditing">
-                    <form ng-submit="updateTask(task)">
-                      <input class="form-control input-sm" ng-value="task.todoText" ng-model="task.updatedTask" />
-                    </form>
-                  </span>
-                </div>
-                <div class="taskSetting">
-                  <div class="taskInfo">1</div>
-                  <div class="taskDay">{{task.day}}</div>
-                  <div class="taskPriority">{{task.priority}}</div>
-                </div>
-              </th>
-              <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">
-                <div>
-                  <button ng-if="!task.isEditing" class="btn btn-info btn-sm btn-circle" ng-click="onEdit(task)">
-                    <span class="glyphicon glyphicon-cog"></span>
-                  </button>
-                  <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelet($index)">
-                    <span class="glyphicon glyphicon-trash"></span>
-                  </button>
-                  <button ng-if="task.isEditing" class="btn btn-primary btn-sm btn-circle" ng-click="updateTask(task)">
-                    <span class="glyphicon glyphicon-floppy-disk"></span>
-                  </button>
-                  <button ng-if="task.isEditing" class="btn btn-default btn-sm btn-circle" ng-click="onCansel(task)">
-                    <span class="glyphicon glyphicon-ban-circle"></span>
-                  </button>
-                </div>
-              </th>
-            </tr>
-          </table>
 
-        </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+        <p>ADS</p>
       </div>
-      <div class="col-sm-2 sidenav">
-        <div class="well">
-          <p>ADS</p>
-        </div>
-        <div class="well">
-          <p>ADS</p>
-        </div>
+      <div class="well">
+        <p>ADS</p>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- end content -->
+<!-- end content -->
 
-  <script src="../ConTTi/indexctrl.js"></script>
-  <script src="../ConTTi/controllers/listctrl.js"></script>
-  <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
+<script src="../ConTTi/indexctrl.js"></script>
+<script src="../ConTTi/controllers/listctrl.js"></script>
+<!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
 </body>
 </html>
