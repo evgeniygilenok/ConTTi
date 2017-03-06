@@ -80,45 +80,26 @@
             <div class="typingTask">{{enterTask}}</div>
             <div class="taskSetting">
               <div class="taskInfo">1</div>
-              <div class="taskDay">
-                <select id="day" ng-options="option.name for option in days track by option.id" ng-model="selectedDay">
-                </select>
-              </div>
-              <div class="taskPriority">
+              <div class="taskDay"><b>Gruop</b><span class="caret"></span>
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                    <span ng-class="{'prio1': prio11, 'prio2': prio22, 'prio3': prio33, 'prio4': prio44, 'prio5': prio55}"><span class="glyphicon glyphicon-flag"></span>
-                    </span>
-                      
+                  <button class="btn btn-sm btn-default dropdown-toggle group" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                    {{selectedGroup}}
                   </button>
-                  <ul class="dropdown-menu">
-                    <li data-toggle="buttons" class="prio-list">
-                      <label class="btn btn-sm btn-default">
-                        <input type="radio" name="options" ng-model="prio11" autocomplete="off">
-                        <span class="glyphicon glyphicon-flag prio1" ng-click="onTogglePrio(prio11)"></span>
-                      </label>
-                      <label class="btn btn-sm btn-default">
-                        <input type="radio" name="options" ng-model="prio22" autocomplete="off">
-                        <span class="glyphicon glyphicon-flag prio2" ng-click="onTogglePrio(prio22)"></span>
-                      </label>
-                      <label class="btn btn-sm btn-default">
-                        <input type="radio" name="options" ng-model="prio33" autocomplete="off">
-                        <span class="glyphicon glyphicon-flag prio3" ng-click="onTogglePrio(prio33)"></span>
-                      </label>
-                      <label class="btn btn-sm btn-default">
-                        <input type="radio" name="options" ng-model="prio44" autocomplete="off">
-                        <span class="glyphicon glyphicon-flag prio4" ng-click="onTogglePrio(prio44)"></span>
-                      </label>
-                      <label class="btn btn-sm btn-default">
-                        <input type="radio" name="options" ng-model="prio55" autocomplete="off">
-                        <span class="glyphicon glyphicon-flag prio5" ng-click="onTogglePrio(prio55)"></span>
-                      </label>
-                    </li>
+                  <ul class="dropdown-menu groups" aria-labelledby="dropdownMenu1">
+                    <li ng-repeat="group in groups"><a ng-click="dropBoxGroupSelected(group)">{{group}}</a></li>
                   </ul>
                 </div>
-              
-                  <!-- <select id="priority" ng-options="option.name for option in priorities track by option.id" ng-model="selectedPriority">
-                </select> -->
+              </div>
+
+              <div class="taskPriority"><b>Priority</b><span class="caret"></span>
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-default dropdown-toggle prior {{prioClass}}" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                    {{selectedPrio}}
+                  </button>
+                  <ul class="dropdown-menu priorities" aria-labelledby="dropdownMenu1">
+                    <li ng-repeat="prio in priorities"><a ng-click="dropBoxPrioSelected(prio)" ng-class="'{{prio}}'">{{prio}}</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </th>
@@ -164,7 +145,7 @@
             <div class="taskSetting">
               <div class="taskInfo">1</div>
               <div class="taskDay">{{task.day}}</div>
-              <div class="taskPriority">{{task.priority}}</div>
+              <div class="taskPriority" ng-class="'{{task.priority}}'">{{task.priority}}</div>
             </div>
           </th>
           <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">

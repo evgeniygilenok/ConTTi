@@ -69,7 +69,8 @@ body {
 }
 
 .taskDay {
-	flex: 1;
+	flex: 3;
+	text-align: center;
 }
 
 .taskInfo {
@@ -78,6 +79,9 @@ body {
 
 .taskPriority {
 	flex: 1;
+	text-align: center;
+	border-radius: 10px;
+	height: 20px;
 }
 
 .actions {
@@ -111,55 +115,62 @@ table th {
 	background-color: rgba(204, 255, 204, 0.7);
 }
 
-.dropdown-menu {
+.dropdown-menu.priorities {
 	margin: 0;
 	padding: 3px;
-	left: -105%;
+	text-align: center;
+	left: -30%;
+	min-width: 50px;
 }
 
-.prio-list {
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
+.dropdown-menu.groups {
+	margin: 0;
+	padding: 3px;
+	left: 10%;
+	text-align: center;
+	min-width: 60px;
 }
 
 .glyphicon-flag {
 	font-size: 140%;
 }
 
-label.btn.btn-sm {
-	margin: 0;
-	padding: 2px 3px;
-	border: none;
-	flex: 1;
-	text-shadow: 0px 0px 1px black;
-}
-
-button.btn.btn-sm.btn-default.dropdown-toggle {
+button.btn.btn-sm.btn-default.dropdown-toggle.prior {
 	margin: 0;
 	padding: 5px 8px;
 	border: none;
-	text-shadow: 0px 0px 1px black;
+	min-width: 60px;
 }
 
-.prio1 {
-	color: #c7c7c7;
+button.btn.btn-sm.btn-default.dropdown-toggle.group {
+	margin: 0;
+	padding: 5px 8px;
+	border: none;
+	min-width: 70px;
+	max-width: 130px;
 }
 
-.prio2 {
-	color: #ffff4d;
+ul>li {
+	cursor: pointer;
+	margin: 3px;
 }
 
-.prio3 {
-	color: #ffe066;
+.lowest {
+	background-color: #c7c7c7;
 }
 
-.prio4 {
-	color: #ff8000;
+.low {
+	background-color: #ffff4d;
 }
 
-.prio5 {
-	color: #cc2900;
+.middle {
+	background-color: #ffe066;
+}
+
+.high {
+	background-color: #ff8000;
+}
+
+.highest {
+	background-color: #cc2900;
 }

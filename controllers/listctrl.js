@@ -33,29 +33,29 @@ var contti = angular.module('contti', []);
 		{
 			todoText: 'fifth task', 
 			done: false,
-			priority: 'very high',
+			priority: 'highest',
 			day: 'Today',
 			isEditing: false
 		},
 		{
 			todoText: 'sixth task', 
 			done: false,
-			priority: 'very low',
+			priority: 'lowest',
 			day: 'Tomorrow',
 			isEditing: false
 		}
 		];
 
 // priority data
-		$scope.priorities = [
-			{id: '1', name: 'very high'},
-			{id: '2', name: 'high'},
-			{id: '3', name: 'middle'},
-			{id: '4', name: 'low'},
-			{id: '5', name: 'very low'}
-			];
-		$scope.onPriority = false;
-		$scope.selectedPriority = {id: '3', name: 'middle'};
+		// $scope.priorities = [
+		// 	{id: '1', name: 'very high'},
+		// 	{id: '2', name: 'high'},
+		// 	{id: '3', name: 'middle'},
+		// 	{id: '4', name: 'low'},
+		// 	{id: '5', name: 'very low'}
+		// 	];
+		// $scope.onPriority = false;
+		// $scope.selectedPriority = {id: '3', name: 'middle'};
 
 // days data
 		$scope.days = [
@@ -70,11 +70,13 @@ var contti = angular.module('contti', []);
 					$scope.taskList.unshift({
 						todoText:$scope.enterTask, 
 						done:false, 
-						priority: $scope.selectedPriority.name,
-						day: $scope.selectedDay.name,
+						priority: $scope.selectedPrio,
+						day: $scope.selectedGroup,
 						isEditing: false
 					});
         	$scope.enterTask = "";
+        	$scope.selectedPrio = 'middle';
+        	$scope.selectedGroup = 'Inbox';
         };
 		
 		$scope.onDelet = function(x){
@@ -88,32 +90,39 @@ var contti = angular.module('contti', []);
 		$scope.onEdit = function(task){
 			task.isEditing = true;
 			task.updatedTask = task.todoText;
-		}
+		};
 
 		$scope.onCansel = function(task) {
 			task.isEditing = false;
-		}
+		};
 
 		$scope.updateTask = function(task) {
 			task.todoText = task.updatedTask;
 			task.isEditing = false;
-		}
+		};
 
 // priority
-		// $scope.prio11 = false;
-		// $scope.prio22 = false;
-		// $scope.prio33 = false;
-		// $scope.prio44 = false;
-		// $scope.prio55 = false;
-		$scope.onTogglePrio = function(x) {
-			x = !x;
-			console.log(x);
-		}
+		$scope.priorities = ['highest', 'high', 'middle', 'low', 'lowest'];
+		$scope.selectedPrio = 'middle';
+		$scope.prioClass = 'middle';
+		$scope.dropBoxPrioSelected = function (item) {
+      $scope.selectedPrio = item;
+      $scope.prioClass = item;
+      console.log($scope.prioClass);
+    };
+
+// groups
+		$scope.groups = ['Inbox', 'Today', 'Tomorrow', 'Next week'];
+		$scope.selectedGroup = 'Inbox';
+		$scope.dropBoxGroupSelected = function (item) {
+      $scope.selectedGroup = item;
+    };
 		
 
 // add new group
 		$scope.addGroup = function(){
 			$scope.days.push({id: '5', name: $scope.enterGroup});
+			$scope.groups.push($scope.enterGroup);
 			$scope.enterGroup = '';
 			}
 
