@@ -46,25 +46,7 @@ var contti = angular.module('contti', []);
 		}
 		];
 
-// priority data
-		// $scope.priorities = [
-		// 	{id: '1', name: 'very high'},
-		// 	{id: '2', name: 'high'},
-		// 	{id: '3', name: 'middle'},
-		// 	{id: '4', name: 'low'},
-		// 	{id: '5', name: 'very low'}
-		// 	];
-		// $scope.onPriority = false;
-		// $scope.selectedPriority = {id: '3', name: 'middle'};
 
-// days data
-		$scope.days = [
-			{id: '1', name: 'Inbox'},
-			{id: '2', name: 'Today'},
-			{id: '3', name: 'Tomorrow'},
-			{id: '4', name: 'Next week'},
-		];
-		$scope.selectedDay = {id: '1', name: 'Inbox'};
 // add new task in taskList
 		$scope.addNewTask = function(){
 					$scope.taskList.unshift({
@@ -78,9 +60,11 @@ var contti = angular.module('contti', []);
         	$scope.selectedPrio = 'middle';
         	$scope.selectedGroup = 'Inbox';
         };
-		
-		$scope.onDelet = function(x){
-			$scope.taskList.splice(x, 1);
+// actions with task
+		$scope.onDelete = function(x){
+			if (confirm("Are you sure?")) {
+				$scope.taskList.splice(x, 1);
+			}
 		};
 
 		$scope.onCompletedClick = function(task){
@@ -104,11 +88,8 @@ var contti = angular.module('contti', []);
 // priority
 		$scope.priorities = ['highest', 'high', 'middle', 'low', 'lowest'];
 		$scope.selectedPrio = 'middle';
-		$scope.prioClass = 'middle';
 		$scope.dropBoxPrioSelected = function (item) {
       $scope.selectedPrio = item;
-      $scope.prioClass = item;
-      console.log($scope.prioClass);
     };
 
 // groups
@@ -121,15 +102,31 @@ var contti = angular.module('contti', []);
 
 // add new group
 		$scope.addGroup = function(){
-			$scope.days.push({id: '5', name: $scope.enterGroup});
 			$scope.groups.push($scope.enterGroup);
 			$scope.enterGroup = '';
 			}
+// filtering
+		// $scope.filteringButton = function(filter) {
+		// 	$scope.filterByGroup = filter;
+		// }
 
-/////////////////////////////
-
-		
-				
-		
 	});
 
+contti.filter('taskFilter', function(){
+	return function(taskList){
+			var list = [];
+			for (i=0; i<taskList.length; i++) {
+				if (taskList[i].done) {
+					list += taskList[i];
+					console.log(i);
+
+				} 
+			}
+			// $scope.filteringButton = function(filter) {
+			// $scope.filterByGroup = filter;
+			// console.log($scope.filterByGroup);
+		// }
+		return list;
+
+	};
+});

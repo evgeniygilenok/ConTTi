@@ -45,10 +45,16 @@
   <div class="container-fluid text-center" ng-controller="listCtrl">    
     <div class="row content">
       <div class="col-sm-2 sidenav">
-        <div ng-repeat="x in days">
-          <p><a href="#">
-            <button class="btn btn-block btn-primary"><div ng-bind="x.name"></div></button>
-          </a></p>
+        <div>
+          <p>
+            <button class="btn btn-block btn-primary" ng-click="filteringButton('')">All Tasks</button>
+          </p>
+        </div>
+        <hr class="hrDivide">
+        <div ng-repeat="x in groups">
+          <p>
+            <button class="btn btn-block btn-primary" ng-click="filteringButton(x)"><div ng-bind="x"></div></button>
+          </p>
         </div>
         <hr class="hrDivide">
         <button class="btn btn-block btn-info" ng-click="addGroup()">Add new group</button>
@@ -77,7 +83,7 @@
             </div>
           </th>
           <th class="todoNameList">
-            <div class="typingTask">{{enterTask}}</div>
+            <div class="typingTask"><span class="glyphicon glyphicon-pencil"></span> {{enterTask}}</div>
             <div class="taskSetting">
               <div class="taskInfo">1</div>
               <div class="taskDay"><b>Gruop</b><span class="caret"></span>
@@ -93,7 +99,7 @@
 
               <div class="taskPriority"><b>Priority</b><span class="caret"></span>
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-default dropdown-toggle prior {{prioClass}}" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                  <button class="btn btn-sm btn-default dropdown-toggle prior {{selectedPrio}}" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
                     {{selectedPrio}}
                   </button>
                   <ul class="dropdown-menu priorities" aria-labelledby="dropdownMenu1">
@@ -117,7 +123,7 @@
 
 
         <table class="table table-hover bgcol">
-          <tr ng-repeat="task in taskList">
+          <tr ng-repeat="task in taskList | taskFilter">
             <th class="isComplite" ng-class="{'todoCompliteTaskColor': task.done}">
               <div>
                 <button class="btn btn-sm btn-default btn-circle" ng-if="!task.done" ng-click="onCompletedClick(task)">
@@ -129,8 +135,8 @@
               </div>
             </th>
             <th class="todoNameList" ng-class="{'todoCompliteTaskColor': task.done}">
-              <div class="typingTask">
-                <span
+            <div class="typingTask">
+              <span
                 class="taskName"
                 ng-if="!task.isEditing"
                 ng-class="{'todoCompliteTask': task.done}">
@@ -153,7 +159,7 @@
               <button ng-if="!task.isEditing" class="btn btn-info btn-sm btn-circle" ng-click="onEdit(task)">
                 <span class="glyphicon glyphicon-cog"></span>
               </button>
-              <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelet($index)">
+              <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelete($index)">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
               <button ng-if="task.isEditing" class="btn btn-primary btn-sm btn-circle" ng-click="updateTask(task)">

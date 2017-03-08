@@ -40,6 +40,10 @@ div.entGr {
   background-color: green;
   text-align: center;
 }
+
+.btn.btn-block.btn-primary>div {
+  overflow-x:hidden;
+}
 /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;
@@ -54,7 +58,7 @@ div.entGr {
     
     /* Set gray background color and 100% height */
     .sidenav {
-      padding-top: 20px;
+      padding: 35px 5px;
       background-color: #f1f1f1;
       height: 100%;
     }

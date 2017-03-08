@@ -40,7 +40,6 @@ body {
 
 .typingTask {
 	min-height: 30px;
-	text-shadow: 2px 0px 2px white;
 }
 
 .todoNameList {
@@ -69,7 +68,7 @@ body {
 }
 
 .taskDay {
-	flex: 3;
+	flex: 1;
 	text-align: center;
 }
 
@@ -87,6 +86,22 @@ body {
 .actions {
 	width: 100px;
 	margin: 0 auto 10px;
+}
+
+.glyphicon-cog {
+	font-size: 130%;
+}
+
+.glyphicon-trash {
+	font-size: 130%;
+}
+
+.glyphicon-floppy-disk {
+	font-size: 130%;
+}
+
+.glyphicon-ban-circle {
+	font-size: 140%;
 }
 
 .table>tbody>tr>td, 
@@ -119,20 +134,23 @@ table th {
 	margin: 0;
 	padding: 3px;
 	text-align: center;
-	left: -30%;
 	min-width: 50px;
+	left: -10px;
+	right: -10px;
 }
 
 .dropdown-menu.groups {
 	margin: 0;
 	padding: 3px;
-	left: 10%;
 	text-align: center;
 	min-width: 60px;
+	left: -15%;
+	right: -15%;
 }
 
-.glyphicon-flag {
-	font-size: 140%;
+.dropdown-menu>li>a {
+	padding: 3px;
+	overflow-x:hidden;
 }
 
 button.btn.btn-sm.btn-default.dropdown-toggle.prior {
