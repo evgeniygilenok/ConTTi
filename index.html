@@ -47,7 +47,12 @@
       <div class="col-sm-2 sidenav">
         <div>
           <p>
-            <button class="btn btn-block btn-primary" ng-click="filteringButton('')">All Tasks</button>
+            <button class="btn btn-block btn-primary" ng-click="onAllTasks()">All Tasks</button>
+          </p>
+        </div>
+        <div>
+          <p>
+            <button class="btn btn-block btn-primary" ng-click="onComplitedTasks()">Complited</button>
           </p>
         </div>
         <hr class="hrDivide">
@@ -123,7 +128,7 @@
 
 
         <table class="table table-hover bgcol">
-          <tr ng-repeat="task in taskList | taskFilter">
+          <tr ng-repeat="task in taskList | taskFilter : ffilter">
             <th class="isComplite" ng-class="{'todoCompliteTaskColor': task.done}">
               <div>
                 <button class="btn btn-sm btn-default btn-circle" ng-if="!task.done" ng-click="onCompletedClick(task)">

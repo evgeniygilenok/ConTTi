@@ -106,27 +106,44 @@ var contti = angular.module('contti', []);
 			$scope.enterGroup = '';
 			}
 // filtering
-		// $scope.filteringButton = function(filter) {
-		// 	$scope.filterByGroup = filter;
-		// }
+		$scope.ffilter = 'all';
+		$scope.onComplitedTasks = function() {
+			$scope.ffilter = 'complited';
+		}
+		$scope.onAllTasks = function() {
+			$scope.ffilter = 'all';
+		}
+		$scope.filteringButton = function(x) {
+			$scope.ffilter = x;
+		}
+
 
 	});
 
 contti.filter('taskFilter', function(){
-	return function(taskList){
-			var list = [];
-			for (i=0; i<taskList.length; i++) {
-				if (taskList[i].done) {
-					list += taskList[i];
-					console.log(i);
-
-				} 
-			}
-			// $scope.filteringButton = function(filter) {
-			// $scope.filterByGroup = filter;
-			// console.log($scope.filterByGroup);
-		// }
+	return function(taskList, ffilter){
+		var list = [];
+		switch(ffilter) {
+			case 'complited':
+				for (var i=0; i<taskList.length; i++) {
+					if (taskList[i].done) {
+						list.push(taskList[i]);
+					} 
+				}
+				break;
+			case 'all':
+				for (i=0; i<taskList.length; i++) {
+					list.push(taskList[i]);
+				}
+				break;
+			default :
+					for (var i=0; i<taskList.length; i++) {
+						if (taskList[i].day === ffilter) {
+							list.push(taskList[i]);
+						} 
+					}
+			break;
+		}
 		return list;
-
 	};
 });
