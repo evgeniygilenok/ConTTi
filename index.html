@@ -47,12 +47,16 @@
       <div class="col-sm-2 sidenav">
         <div>
           <p>
-            <button class="btn btn-block btn-primary" ng-click="onAllTasks()">All Tasks</button>
+            <button class="btn btn-block btn-primary" ng-click="onAllTasks()">All Tasks
+              <span class="badge" ng-bind="taskList.length"></span>
+            </button>
           </p>
         </div>
         <div>
           <p>
-            <button class="btn btn-block btn-primary" ng-click="onComplitedTasks()">Complited</button>
+            <button class="btn btn-block btn-primary" ng-click="onComplitedTasks()">Complited
+              <span class="badge" ng-bind="listOfCompliteTask.length"></span>
+            </button>
           </p>
         </div>
         <hr class="hrDivide">
@@ -88,27 +92,27 @@
             </div>
           </th>
           <th class="todoNameList">
-            <div class="typingTask"><span class="glyphicon glyphicon-pencil"></span> {{enterTask}}</div>
+            <div class="typingTask" ng-cloak><span class="glyphicon glyphicon-pencil"></span> {{enterTask}}</div>
             <div class="taskSetting">
               <div class="taskInfo">1</div>
               <div class="taskDay"><b>Gruop</b><span class="caret"></span>
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-default dropdown-toggle group" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                  <button class="btn btn-sm btn-default dropdown-toggle group" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" ng-cloak>
                     {{selectedGroup}}
                   </button>
                   <ul class="dropdown-menu groups" aria-labelledby="dropdownMenu1">
-                    <li ng-repeat="group in groups"><a ng-click="dropBoxGroupSelected(group)">{{group}}</a></li>
+                    <li ng-repeat="group in groups"><a ng-click="dropBoxGroupSelected(group)" ng-cloak>{{group}}</a></li>
                   </ul>
                 </div>
               </div>
 
               <div class="taskPriority"><b>Priority</b><span class="caret"></span>
                 <div class="dropdown">
-                  <button class="btn btn-sm btn-default dropdown-toggle prior {{selectedPrio}}" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true">
+                  <button class="btn btn-sm btn-default dropdown-toggle prior {{selectedPrio}}" id="dropdownMenu1" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" ng-cloak>
                     {{selectedPrio}}
                   </button>
                   <ul class="dropdown-menu priorities" aria-labelledby="dropdownMenu1">
-                    <li ng-repeat="prio in priorities"><a ng-click="dropBoxPrioSelected(prio)" ng-class="'{{prio}}'">{{prio}}</a></li>
+                    <li ng-repeat="prio in priorities"><a ng-click="dropBoxPrioSelected(prio)" ng-class="'{{prio}}'" ng-cloak>{{prio}}</a></li>
                   </ul>
                 </div>
               </div>
@@ -134,7 +138,7 @@
                 <button class="btn btn-sm btn-default btn-circle" ng-if="!task.done" ng-click="onCompletedClick(task)">
                   <span class="glyphicon glyphicon-ok"></span>
                 </button>
-                <button class="btn btn-sm btn-success btn-circle" ng-if="task.done" ng-click="onCompletedClick(task)">
+                <button class="btn btn-sm btn-success btn-circle" ng-if="task.done" ng-click="onCompletedClick(task)" ng-cloak>
                   <span class="glyphicon glyphicon-ok"></span>
                 </button>
               </div>
@@ -144,10 +148,10 @@
               <span
                 class="taskName"
                 ng-if="!task.isEditing"
-                ng-class="{'todoCompliteTask': task.done}">
-                {{task.todoText}}
+                ng-class="{'todoCompliteTask': task.done}"
+                ng-bind="task.todoText">
               </span>
-              <span class="taskName" ng-if="task.isEditing">
+              <span class="taskName" ng-if="task.isEditing" ng-cloak>
                 <form ng-submit="updateTask(task)">
                   <input class="form-control input-sm" ng-value="task.todoText" ng-model="task.updatedTask" />
                 </form>
@@ -155,8 +159,8 @@
             </div>
             <div class="taskSetting">
               <div class="taskInfo">1</div>
-              <div class="taskDay">{{task.day}}</div>
-              <div class="taskPriority" ng-class="'{{task.priority}}'">{{task.priority}}</div>
+              <div class="taskDay" ng-bind="task.day"></div>
+              <div class="taskPriority" ng-class="'{{task.priority}}'" ng-bind="task.priority"></div>
             </div>
           </th>
           <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">
@@ -164,13 +168,13 @@
               <button ng-if="!task.isEditing" class="btn btn-info btn-sm btn-circle" ng-click="onEdit(task)">
                 <span class="glyphicon glyphicon-cog"></span>
               </button>
-              <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelete($index)">
+              <button ng-if="!task.isEditing" class="btn btn-danger btn-sm btn-circle" ng-click="onDelete(task, $index)">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
-              <button ng-if="task.isEditing" class="btn btn-primary btn-sm btn-circle" ng-click="updateTask(task)">
+              <button ng-if="task.isEditing" class="btn btn-primary btn-sm btn-circle" ng-click="updateTask(task)" ng-cloak>
                 <span class="glyphicon glyphicon-floppy-disk"></span>
               </button>
-              <button ng-if="task.isEditing" class="btn btn-default btn-sm btn-circle" ng-click="onCansel(task)">
+              <button ng-if="task.isEditing" class="btn btn-default btn-sm btn-circle" ng-click="onCansel(task)" ng-cloak>
                 <span class="glyphicon glyphicon-ban-circle"></span>
               </button>
             </div>

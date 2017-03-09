@@ -11,7 +11,7 @@ var contti = angular.module('contti', []);
 		},
 		{
 			todoText: 'second task', 
-			done: true,
+			done: false,
 			priority: 'high',
 			day: 'Tomorrow',
 			isEditing: false
@@ -25,7 +25,7 @@ var contti = angular.module('contti', []);
 		},
 		{
 			todoText: 'fourth task', 
-			done: true,
+			done: false,
 			priority: 'low',
 			day: 'Tomorrow',
 			isEditing: false
@@ -61,15 +61,30 @@ var contti = angular.module('contti', []);
         	$scope.selectedGroup = 'Inbox';
         };
 // actions with task
-		$scope.onDelete = function(x){
+		$scope.listOfCompliteTaskDelete = function(x, y) {
+			for (var i=0; i<y.length; i++) {
+				if (x.todoText === y[i].todoText) {
+					y.splice(i, 1);
+				}
+			}
+		}
+		$scope.onDelete = function(task, x){
 			if (confirm("Are you sure?")) {
 				$scope.taskList.splice(x, 1);
+				$scope.listOfCompliteTaskDelete(task, $scope.listOfCompliteTask);
 			}
 		};
 
+		$scope.listOfCompliteTask = [];
 		$scope.onCompletedClick = function(task){
-					task.done = !task.done;
-				};
+			if (!task.done) {
+				task.done = !task.done;
+				$scope.listOfCompliteTask.push(task);
+			} else if (task.done) {
+				task.done = !task.done;
+				$scope.listOfCompliteTaskDelete(task, $scope.listOfCompliteTask);
+			}
+		};
 
 		$scope.onEdit = function(task){
 			task.isEditing = true;
@@ -116,6 +131,8 @@ var contti = angular.module('contti', []);
 		$scope.filteringButton = function(x) {
 			$scope.ffilter = x;
 		}
+
+	
 
 
 	});
