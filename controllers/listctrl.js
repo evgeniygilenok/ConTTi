@@ -48,7 +48,7 @@ var contti = angular.module('contti', []);
 
 
 // add new task in taskList
-		$scope.addNewTask = function(){
+		$scope.addNewTask = function() {
 					$scope.taskList.unshift({
 						todoText:$scope.enterTask, 
 						done:false, 
@@ -68,7 +68,7 @@ var contti = angular.module('contti', []);
 				}
 			}
 		}
-		$scope.onDelete = function(task, x){
+		$scope.onDelete = function(task, x) {
 			if (confirm("Are you sure?")) {
 				$scope.taskList.splice(x, 1);
 				$scope.listOfCompliteTaskDelete(task, $scope.listOfCompliteTask);
@@ -76,7 +76,7 @@ var contti = angular.module('contti', []);
 		};
 
 		$scope.listOfCompliteTask = [];
-		$scope.onCompletedClick = function(task){
+		$scope.onCompletedClick = function(task) {
 			if (!task.done) {
 				task.done = !task.done;
 				$scope.listOfCompliteTask.push(task);
@@ -86,9 +86,10 @@ var contti = angular.module('contti', []);
 			}
 		};
 
-		$scope.onEdit = function(task){
+		$scope.onEdit = function(task) {
 			task.isEditing = true;
 			task.updatedTask = task.todoText;
+			$scope.selectedPrioUpdate = task.priority;
 		};
 
 		$scope.onCansel = function(task) {
@@ -97,6 +98,7 @@ var contti = angular.module('contti', []);
 
 		$scope.updateTask = function(task) {
 			task.todoText = task.updatedTask;
+			task.priority = $scope.selectedPrioUpdate
 			task.isEditing = false;
 		};
 
@@ -106,6 +108,9 @@ var contti = angular.module('contti', []);
 		$scope.dropBoxPrioSelected = function (item) {
       $scope.selectedPrio = item;
     };
+    $scope.dropBoxPrioSelectedUpdate = function (item) {
+    	$scope.selectedPrioUpdate = item;
+    };
 
 // groups
 		$scope.groups = ['Inbox', 'Today', 'Tomorrow', 'Next week'];
@@ -113,10 +118,8 @@ var contti = angular.module('contti', []);
 		$scope.dropBoxGroupSelected = function (item) {
       $scope.selectedGroup = item;
     };
-		
-
 // add new group
-		$scope.addGroup = function(){
+		$scope.addGroup = function() {
 			$scope.groups.push($scope.enterGroup);
 			$scope.enterGroup = '';
 			}
@@ -127,6 +130,9 @@ var contti = angular.module('contti', []);
 		}
 		$scope.onAllTasks = function() {
 			$scope.ffilter = 'all';
+		}
+		$scope.notComplited = function() {
+			$scope.ffilter = 'notcomplited';
 		}
 		$scope.filteringButton = function(x) {
 			$scope.ffilter = x;
@@ -144,6 +150,13 @@ contti.filter('taskFilter', function(){
 			case 'complited':
 				for (var i=0; i<taskList.length; i++) {
 					if (taskList[i].done) {
+						list.push(taskList[i]);
+					} 
+				}
+				break;
+			case 'notcomplited':
+				for (var i=0; i<taskList.length; i++) {
+					if (!taskList[i].done) {
 						list.push(taskList[i]);
 					} 
 				}

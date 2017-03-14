@@ -1,25 +1,22 @@
-var contti = angular.module('contti', ["ngRoute"]);
-	contti.config(function($routeProvider) {
+var contti = angular.module('contti', ['ngRoute']);
+	contti.config(function($routeProvider, $locationProvider) {
+			$locationProvider.html5Mode(true);
 	    $routeProvider
 	    .when("/", {
-	        templateUrl : "view/main.html"
+	        template : '<div>view/main.html</div>'
 	    })
-	    .when("/todolist", {
-	        templateUrl : "view/todolist.html",
-	        controller : "listctrl"
+	    .when("/ToDoList", {
+	        template : '<div>view/todolist.html</div>'
 	    })
-	    .when("/economy", {
-	        templateUrl : "view/economy.html"
+	    .when("/Economy", {
+	        template : "view/economy.html"
 	    })
-	    .when("/projects", {
-	        templateUrl : "view/projects.html"
+	    .when("/Projects", {
+	        template : "view/projects.html"
 	    })
-	    .when("/contacts", {
-	        templateUrl : "view/contacts.html"
+	    .when("/Contacts", {
+	        template : "view/contacts.html"
 	    })
-	    .otherwise({
-	    		templateUrl : "main.html"
-	    });
 	});
 
 	

@@ -13,7 +13,6 @@
   
   <link rel="stylesheet" href="../ConTTi/maincss.css">
   <link rel="stylesheet" href="../ConTTi/view/todolist.css">
-  
 </head>
 <body ng-app="contti">
   <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -59,6 +58,13 @@
             </button>
           </p>
         </div>
+        <div>
+          <p>
+            <button class="btn btn-block btn-primary" ng-click="notComplited()">Not complited
+              <span class="badge" ng-bind="taskList.length - listOfCompliteTask.length"></span>
+            </button>
+          </p>
+        </div>
         <hr class="hrDivide">
         <div ng-repeat="x in groups">
           <p>
@@ -74,6 +80,7 @@
       <div class="col-sm-8 text-left"> 
 
         <h3 class="text-center main-header">Todo list</h3>
+
         <form class="row" ng-submit="addNewTask()">
           <div class="newTaskForm">
             <input class="form-control" type="text" placeholder="New task..." ng-model="enterTask">
@@ -160,7 +167,20 @@
             <div class="taskSetting">
               <div class="taskInfo">1</div>
               <div class="taskDay" ng-bind="task.day"></div>
-              <div class="taskPriority" ng-class="'{{task.priority}}'" ng-bind="task.priority"></div>
+              <div 
+                ng-if="!task.isEditing" 
+                class="taskPriority" 
+                ng-class="'{{task.priority}}'" 
+                ng-bind="task.priority">
+              </div>
+              <div class="dropdown" ng-if="task.isEditing">
+                <button class="btn btn-sm btn-default dropdown-toggle prior {{selectedPrioUpdate}}" id="dropdownMenu3" type="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" ng-cloak>
+                  {{selectedPrioUpdate}}
+                </button>
+                <ul class="dropdown-menu priorities" aria-labelledby="dropdownMenu3">
+                  <li ng-repeat="prio in priorities"><a ng-click="dropBoxPrioSelectedUpdate(prio)" ng-class="'{{prio}}'" ng-cloak>{{prio}}</a></li>
+                </ul>
+              </div>
             </div>
           </th>
           <th class="actions" ng-class="{'todoCompliteTaskColor': task.done}">
@@ -197,7 +217,7 @@
 
 <!-- end content -->
 
-<script src="../ConTTi/indexctrl.js"></script>
+<!-- <script src="../ConTTi/indexctrl.js"></script> -->
 <script src="../ConTTi/controllers/listctrl.js"></script>
 <!-- <script src="../ConTTi/controllers/economyctrl.js"></script> -->
 </body>
