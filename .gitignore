@@ -1,3 +1,4 @@
 logs/
 docs/*.txt
 node_modules/
+_config.yml
