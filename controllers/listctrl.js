@@ -106,8 +106,8 @@ var contti = angular.module('contti', []);
 		$scope.priorities = ['highest', 'high', 'middle', 'low', 'lowest'];
 		$scope.selectedPrio = 'middle';
 		$scope.dropBoxPrioSelected = function (item) {
-      $scope.selectedPrio = item;
-    };
+      		$scope.selectedPrio = item;
+    	};
     $scope.dropBoxPrioSelectedUpdate = function (item) {
     	$scope.selectedPrioUpdate = item;
     };
@@ -116,13 +116,13 @@ var contti = angular.module('contti', []);
 		$scope.groups = ['Inbox', 'Today', 'Tomorrow', 'Next week'];
 		$scope.selectedGroup = 'Inbox';
 		$scope.dropBoxGroupSelected = function (item) {
-      $scope.selectedGroup = item;
-    };
+      		$scope.selectedGroup = item;
+    	};
 // add new group
 		$scope.addGroup = function() {
 			$scope.groups.push($scope.enterGroup);
 			$scope.enterGroup = '';
-			}
+		}
 // filtering
 		$scope.ffilter = 'all';
 		$scope.onComplitedTasks = function() {
