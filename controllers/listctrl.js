@@ -177,4 +177,3 @@ contti.filter('taskFilter', function(){
 		return list;
 	};
 });
-// smthn
